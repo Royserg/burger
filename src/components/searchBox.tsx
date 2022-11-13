@@ -50,8 +50,6 @@ const SearchInput = () => {
     }
   };
 
-  console.log({ status, data });
-
   return (
     <div className='relative w-full max-w-xl flex mx-auto justify-center'>
       <input
