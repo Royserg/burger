@@ -67,7 +67,7 @@ const SearchInput = () => {
         <BiCurrentLocation className='text-3xl' />
       </button>
 
-      {/* Render place suggestions */}
+      {/* Render location suggestions */}
       {status === 'OK' && (
         <div className='dropdown dropdown-open absolute w-full bottom-0 left-0'>
           <ul
