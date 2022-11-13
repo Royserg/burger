@@ -1,21 +1,22 @@
 import create from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
+import { SearchLocation } from '../shared/interfaces/location';
 
 interface SearchState {
-  searchTerm: string;
-  setSearchTerm: (val: string) => void;
+  selectedLocation: SearchLocation | null;
+  setSelectedLocation: (data: SearchLocation) => void;
 }
 
 export const useSearchStore = create<SearchState>()(
   devtools(
-    persist(
-      (set) => ({
-        searchTerm: '',
-        setSearchTerm: (val: string) => set(() => ({ searchTerm: val })),
-      }),
-      {
-        name: 'search-store',
-      }
-    )
+    // persist(
+    (set) => ({
+      selectedLocation: null,
+      setSelectedLocation: (data) => set(() => ({ selectedLocation: data })),
+    }),
+    {
+      name: 'search-store',
+    }
   )
+  // )
 );

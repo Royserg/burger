@@ -1,8 +1,9 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ReactMapGl, { MapRef, ViewState } from 'react-map-gl';
+import { useSearchStore } from '../store/search';
 
 export const Map = () => {
-  const mapRef = useRef<MapRef | null>(null);
+  const { selectedLocation } = useSearchStore((state) => state);
 
   const [viewport, setViewport] = useState<Partial<ViewState>>({
     // Copenhagen coords by default
@@ -11,18 +12,27 @@ export const Map = () => {
     zoom: 13,
   });
 
+  useEffect(() => {
+    // Move center of the map to selected location
+    if (selectedLocation) {
+      const { lat, lng } = selectedLocation;
+      setViewport({
+        latitude: lat,
+        longitude: lng,
+      });
+    }
+  }, [selectedLocation]);
+
   return (
-    <div className='absolute w-full h-full bg-gray-100 z-0'>
-      <ReactMapGl
-        {...viewport}
-        mapStyle='mapbox://styles/mapbox/light-v9'
-        mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_API_KEY}
-        testMode
-        onMove={(e) => setViewport(e.viewState)}
-        maxZoom={14}
-        minZoom={4}
-        ref={(instance) => (mapRef.current = instance)}
-      ></ReactMapGl>
-    </div>
+    <ReactMapGl
+      {...viewport}
+      mapStyle='mapbox://styles/mapbox/light-v9'
+      mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_API_KEY}
+      testMode
+      onMove={(e) => setViewport(e.viewState)}
+      maxZoom={14}
+      minZoom={4}
+      reuseMaps
+    ></ReactMapGl>
   );
 };
