@@ -16,7 +16,7 @@ export const SearchBox = () => {
   });
 
   if (!isLoaded) return <div>Loading...</div>;
-  if (loadError) return <div>Loading error.</div>;
+  if (loadError) return <div>Loading GoogleMapsScript error.</div>;
 
   return <SearchInput />;
 };

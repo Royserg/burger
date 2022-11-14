@@ -26,7 +26,7 @@ export const getNearbyBurgerRestaurants = (data: {
           resolve(results);
         }
 
-        reject('Failed to find restaurants');
+        reject('Failed to find restaurants.');
       }
     });
   });
