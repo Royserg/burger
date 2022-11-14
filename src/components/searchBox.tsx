@@ -16,7 +16,7 @@ export const SearchBox = () => {
   });
 
   if (!isLoaded) return <div>Loading...</div>;
-  if (loadError) return <div>Loading error.</div>;
+  if (loadError) return <div>Loading GoogleMapsScript error.</div>;
 
   return <SearchInput />;
 };
@@ -61,11 +61,6 @@ const SearchInput = () => {
         onChange={handleChange}
         autoComplete='off'
       />
-
-      {/* TODO: Get current location - browser API  */}
-      <button className='btn btn-square btn-ghost btn-lg -ml-16'>
-        <BiCurrentLocation className='text-3xl' />
-      </button>
 
       {/* Render location suggestions */}
       {status === 'OK' && (
